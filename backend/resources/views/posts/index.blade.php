@@ -15,7 +15,13 @@
     @endforelse
 
     <x-alert>
-        Все, что здесь я напишу, отправится в "$slot"
+        По умолчанию success
+    </x-alert>
+
+    <br>
+
+    <x-alert type="error">
+        Здесь ошибка
     </x-alert>
 @endsection
 
