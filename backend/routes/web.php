@@ -26,11 +26,29 @@ Route::put('/posts/{post}/like', [PostController::class, 'like'])->name('posts.l
 Route::get('/request/demo', function () {
     return view('request.demo');
 });
-
 Route::post('/request/demo', function (Request $request) {
     $data = $request->validate([
         'email' => 'required|email',
         'name' => 'required|min:2',
     ]);
     dd($data);
+});
+
+Route::get('/response/demo', function () {
+    return view('response.demo');
+});
+Route::post('/response/demo', function (Request $request) {
+    $data = $request->validate([
+        'email' => 'required|email',
+    ]);
+
+    if ($data['email'] === 'admin@test.com') {
+        return response()->json([
+            'role' => 'admin'
+        ]);
+    }
+
+    return redirect()
+        ->back()
+        ->with('info', 'Обычный пользователь');
 });
