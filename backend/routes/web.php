@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\PostController;
+use Illuminate\Http\Request;
 
 //Route::get('/', function () {
 //    return view('welcome');
@@ -21,3 +22,15 @@ Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.upda
 Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
 
 Route::put('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
+
+Route::get('/request/demo', function () {
+    return view('request.demo');
+});
+
+Route::post('/request/demo', function (Request $request) {
+    $data = $request->validate([
+        'email' => 'required|email',
+        'name' => 'required|min:2',
+    ]);
+    dd($data);
+});
