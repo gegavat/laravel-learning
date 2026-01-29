@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StorePostRequest;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -11,12 +13,11 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = [
-            ['id' => 1, 'title' => 'Первый пост', 'content' => 'Текст первого поста'],
-            ['id' => 2, 'title' => 'Второй пост', 'content' => 'Текст второго поста'],
-        ];
-
-//        $posts = [];
+//        $posts = [
+//            ['id' => 1, 'title' => 'Первый пост', 'content' => 'Текст первого поста'],
+//            ['id' => 2, 'title' => 'Второй пост', 'content' => 'Текст второго поста'],
+//        ];
+        $posts = Post::all();
 
         return view('posts.index', compact('posts'));
     }
@@ -32,9 +33,17 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        dd($request->all());
+        // 1 способ записи в БД
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+        ]);
+        // 2 способ записи в БД
+//        Post::create($request->only(['title', 'content']));
+
+        return redirect('/posts/index');
     }
 
     /**

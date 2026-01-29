@@ -4,13 +4,19 @@
 
 @section('content')
     <h1>Добавление поста</h1>
+    <hr>
 
     <form method="POST" action="{{ route('posts.store') }}">
         @csrf
 
-        <input type="text" name="title" placeholder="Заголовок">
-        <textarea name="content"></textarea>
+        <div class="mb-3">
+            <input class="form-control" type="text" name="title" placeholder="Заголовок">
+        </div>
 
-        <button type="submit">Создать</button>
+        <div class="mb-3">
+            <textarea class="form-control" name="content" placeholder="Содержимое поста..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Создать</button>
     </form>
 @endsection

@@ -4,11 +4,13 @@
 
 @section('content')
     <h1>Список постов</h1>
+    <hr>
 
     @forelse($posts as $post)
         <article>
             <h2>{{ $post['title'] }}</h2>
             <p>{{ $post['content'] }}</p>
+            <hr>
         </article>
     @empty
         <p>Постов пока нет 😢</p>
